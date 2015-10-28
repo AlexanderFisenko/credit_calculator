@@ -1,0 +1,43 @@
+%section#calculator
+  %h2 Кредитный онлайн-калькулятор
+  .calculator-description
+    Предлагаем вам рассчитать ориентировочную сумму ежемесячных платежей по возврату основной суммы и процентов за пользование кредитом в зависимости от срока кредитования и размера процентной ставки, а также определить наиболее удобную для вас схему кредитования.
+
+  %form{ action: '/result', method: 'get', name: 'form', class: '' }
+    .form-group.row
+      .col-md-2
+        %strong Кредитные сведения:
+
+    .form-group.row
+      .col-md-2
+        %label{ for: 'rate' } Процентная ставка (%):
+      .col-md-3
+        %input{ type: 'text', name: 'rate', id: 'rate', class: 'form-control' }
+
+    .form-group.row
+      .col-md-2
+        %label{ for: 'total_loan' } Сумма кредита:
+      .col-md-3
+        %input{ type: 'text', name: 'total_loan', id: 'total_loan', class: 'form-control' }
+
+    .form-group.row
+      .col-md-2
+        %label Метод погашения кредита:
+      .col-md-3
+        %input{ type: 'radio', name: 'type', id: "#{Calculator::PaymentType::DEFAULT}-paytype", value: "#{Calculator::PaymentType::DEFAULT}" }
+        %label{ for: "#{Calculator::PaymentType::DEFAULT}-paytype" } Стандартный
+        %br
+        %input{ type: 'radio', name: 'type', id: "#{Calculator::PaymentType::EQUAL}-paytype", value: "#{Calculator::PaymentType::EQUAL}" }
+        %label{ for: "#{Calculator::PaymentType::EQUAL}-paytype" } Аннуитентный (равными частями)
+        
+    .form-group.row
+      .col-md-2
+        %label{ for: 'period_in_months' } Срок кредита (в месяцах):
+      .col-md-3
+        %input{ type: 'text', name: 'period_in_months', class: 'form-control' }
+
+    .form-group.row
+      .col-md-2
+        %strong График платежей:
+      .col-md-3
+        %input{ type: 'submit', value: 'Построить', class: 'btn btn-default' } 

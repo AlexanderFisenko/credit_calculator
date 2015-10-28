@@ -1,0 +1,7 @@
+1) gem install sinatra
+2) gem install haml
+3) gem install rspec
+4) gem install rack
+5) gem install rack-test
+3) ruby app.rb
+4) to go http://localhost:4567/calculator

@@ -1,0 +1,28 @@
+%section#result
+  %p Процентная ставка: #{rate_in_percents(@calculator.rate)}%
+  %p Сумма кредита: #{@calculator.total_loan.round}
+
+  %table.result-table.table.table-striped.table-bordered
+    %tbody
+      %tr.header
+        %th номер месяца
+        %th погашение кредита
+        %th сумма начисляемых процентов
+        %th общий взнос
+        %th остаток кредита
+      - (1..@calculator.period_in_months).to_a.each do |month|
+        %tr
+          %td= month
+          %td= round_and_format(@calculator.amount_of_monthly_repayment(month))
+          %td= round_and_format(@calculator.amount_of_interest_accrued(month))
+          %td= round_and_format(@calculator.total_inpayment_per_month(month))
+          %td= round_and_format(@calculator.loan_balance(month))
+      %tr.total-sum
+        %td
+        %td= round_and_format(@calculator.summarized_amount_of_repayment_for_all_months)
+        %td= round_and_format(@calculator.summarized_amount_of_interest_accrued_for_all_months)
+        %td= round_and_format(@calculator.summarized_total_inpayment_for_all_months)
+        %td
+
+
+  %a{ href: '/calculator', class: 'btn btn-default' } Назад
